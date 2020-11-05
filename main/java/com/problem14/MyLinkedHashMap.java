@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class MyLinkedHashMap<K, V> {
 	private final int numBuckets;
 	ArrayList<MyLinkedList<K>> myBucketArray;
+	private MyMapNode<K, V> head;
 
 	public MyLinkedHashMap() {
 		this.numBuckets = 10;
@@ -45,9 +46,26 @@ public class MyLinkedHashMap<K, V> {
 			myMapNode.setValue(value);
 		}
 	}
-	
+
+	public MyMapNode<K,V> remove(K key) {
+		int index = this.getBucketIndex(key);
+		MyLinkedList<K> myLinkedList = this.myBucketArray.get(index);
+		if(myLinkedList==null)
+			return null;
+		else {
+			MyMapNode<K, V> myMapNode = (MyMapNode<K, V>) myLinkedList.search(key);
+			if(myMapNode==null) {
+				return null;
+			}
+			else {
+				MyMapNode<K, V> deletedNode = (MyMapNode<K, V>) myLinkedList.removeParticularNode(myMapNode);
+				return deletedNode;
+			}
+		}
+	}
+
 	@Override
 	public String toString() {
-		return "MyLinkedHashMap List{"+ myBucketArray+ '}';
+		return "MyLinkedHashMap List{" + myBucketArray + '}';
 	}
 }

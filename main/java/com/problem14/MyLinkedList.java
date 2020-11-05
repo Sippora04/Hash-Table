@@ -23,7 +23,7 @@ public class MyLinkedList<K> {
 	}
 
 	public void printMyNode() {
-		StringBuffer myNodes = new StringBuffer("Nodes are: ");
+		StringBuffer myNodes = new StringBuffer("My Nodes: ");
 		INode tempNode = head;
 		while (tempNode.getNext() != null) {
 			myNodes.append(tempNode.getKey());
@@ -87,15 +87,22 @@ public class MyLinkedList<K> {
 		return null;
 	}
 
-	public void removeParticularNode(INode<K> deleteNode) {
+	public INode<K> removeParticularNode(INode<K> deleteNode) {
 		INode tempNode = this.head;
 		INode prev = null;
-		while (tempNode != null && tempNode.getKey() != deleteNode.getKey()) {
-			prev = tempNode;
-			tempNode = tempNode.getNext();
+		if(tempNode != null && tempNode.getKey() == deleteNode.getKey()) {
+			tempNode.setNext(null);
+			return tempNode;
 		}
-		prev.setNext(tempNode.getNext());
-		tempNode.setNext(null);
+		else {
+			while (tempNode != null && tempNode.getKey() != deleteNode.getKey()) {
+				prev = tempNode;
+				tempNode = tempNode.getNext();
+			}
+			prev.setNext(tempNode.getNext());
+			tempNode.setNext(null);
+			return tempNode;
+		}
 	}
 
 	public int size() {
