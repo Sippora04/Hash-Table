@@ -23,7 +23,7 @@ public class MyLinkedList<K> {
 	}
 
 	public void printMyNode() {
-		StringBuffer myNodes = new StringBuffer("My Nodes: ");
+		StringBuffer myNodes = new StringBuffer("Nodes are: ");
 		INode tempNode = head;
 		while (tempNode.getNext() != null) {
 			myNodes.append(tempNode.getKey());
